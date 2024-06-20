@@ -274,4 +274,36 @@ This allows you to rebuild the Eairp docker image locally. Here are the steps:
 
 Note that `docker-compose up` will automatically build the Eairp image on the first run. If you need to rebuild it you can issue `docker-compose up --build`. You can also build the image with `docker build . -t eairp:latest` for example.
 
-You can also just build the image by issuing `docker build -t eairp .` and then use the instructions from above to start Eairp and the database using `docker run ...`.
+You can also just build the image by issuing `docker build -t eairp .` and then use the instructions from above to start Eairp and the database using `docker run ...`
+
+# Upgrading Eairp
+
+You've installed an Eairp docker image and used it and now comes the time when you'd like to upgrade Eairp to a newer version.
+
+If you've followed the instructions above you've mapped the Eairp permanent directory to a local directory on your host.
+
+All you need to do to upgrade is to stop the running Eairp container and start the new version of it that you want to upgrade to. You should keep your Mysql container and Redis container running.
+
+Note that your current Eairp configuration files (`start.sh`, `.env` and `application.yml`) will be preserved. 
+
+You should always check the [Release Notes](https://github.com/wansenai/eairp/releases) for all releases that happened between your current version and the new version you're upgrading to, as there could be some manual steps to perform (such as updating your Eairp configuration files).
+
+# Details for the eairp image
+
+## Configuration Options
+
+The first time you create a container out of the xwiki image, a shell script (`/usr/local/bin/docker-entrypoint.sh`) is executed in the container to setup some configuration. The following environment variables can be passed:
+
+-	`SPRING_DATASOURCE_URL`: Eairp is used to connect to the Mysql database JDBC address, Defaults port to 3306.
+-	`SPRING_DATASOURCE_USERNAME`: Username for connecting to the MySQL database
+-	`SPRING_DATASOURCE_PASSWORD`: Password for connecting to the MySQL database
+-	`SPRING_REDIS_HOST`: Host address used by Eairp to connect to the Redis database
+-	`SPRING_REDIS_PORT`: The port number of the Redis database,  Defaults to 6379.
+-	`SPRING_REDIS_PASSWORD`: Password for connecting to the Redis database
+-	`API_BASE_URL`: Used for front-end access to back-end API address, you can set your domain name or server IP, Defaults to *http://localhost:8088/erp-api*.
+
+If you need to perform some advanced configuration, you can get a shell inside the running Eairp container by issuing the following (but note that these won't be saved if you remove the container):
+
+```console
+docker exec -it <eairp container id> bash -l
+```

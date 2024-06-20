@@ -68,7 +68,7 @@ You need to make sure these directories exist, and then copy the `eairp.sql` fil
 
 Note: Make sure the directories you are mounting into the container are fully-qualified, and aren't relative paths.
 
-```bash
+```shell
 docker run --net=eairp-nw \
            -d \
            --name mysql-eairp \

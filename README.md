@@ -160,7 +160,9 @@ If you want to deploy on your server, please modify the value of the `API_BASE_U
 
 ### Using docker-compose
 
-Another solution is to use the Docker Compose files we provide, You must download 5 files from [eairp-docker](https://github.com/wansenai/eairp-docker) repository, they are:
+Another solution is to use the Docker Compose files we provide.
+
+First you need to download the [eairp source code](https://github.com/wansenai/eairp/releases) to your local machine, then you must download 5 files from [eairp-docker](https://github.com/wansenai/eairp-docker) repository, they are:
 
 -	`.env`
 -	`Dockerfile`

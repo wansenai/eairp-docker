@@ -174,8 +174,8 @@ First you need to download the [eairp source code](https://github.com/wansenai/e
 
 Then copy these four files and the `mysql-scripts` folder to the Eairp source code directory structure. for example:
 
+```markdown
 eairp/
-│
 ├── core/
 ├── desktop/
 ├── docs/
@@ -188,3 +188,4 @@ eairp/
 └── docker-compose.yaml
 └── Dockerfile
 └── start.sh
+```

@@ -44,6 +44,14 @@ Then there are several options:
 1.	Pull the eairp image from DockerHub.
 2.	Get the [sources of this project](https://github.com/wansenai/eairp) and build them.
 
+## Pulling an existing image
+
+You need to run 3 containers:
+
+-	One for the Eairp image
+-	One image for Eairp to connect to a MySQL database
+-	One image for Eairp to connect to a Redis database
+
 ### Using docker run
 
 Start by creating a dedicated docker network:

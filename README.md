@@ -150,4 +150,6 @@ OR
 docker run --net=eairp-nw -d --name eairp -p 8088:8088 -p 3000:80 -v /usr/local/eairp:/application/log -e SPRING_DATASOURCE_URL=jdbc:mysql://mysql-eairp:3306/eairp -e SPRING_DATASOURCE_USERNAME=eairp -e SPRING_DATASOURCE_PASSWORD=123456 -e SPRING_REDIS_HOST=redis-eairp  -e SPRING_REDIS_PORT=6379 -e SPRING_REDIS_PASSWORD=123456 -e API_BASE_URL=https://eairp.cn/erp-api wansenai/eairp:latest
 ```
 
-Please don’t forget to add the MySQL database connection environment variables (`SPRING_DATASOURCE_URL`) and the Redis database connection environment variables (`SPRING_REDIS_HOST`) with the names of the MySQL container and Redis container created earlier so that Eairp knows the location of its databases.
+Note the Eairp uses Spring DataSource in Spring Boot as the data source to connect to the database
+
+**Please don’t forget to add the MySQL database connection environment variables (`SPRING_DATASOURCE_URL`) and the Redis database connection environment variables (`SPRING_REDIS_HOST`) with the names of the MySQL container and Redis container created earlier so that Eairp knows the location of its databases.**

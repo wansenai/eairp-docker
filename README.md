@@ -170,9 +170,7 @@ First you need to download the [eairp source code](https://github.com/wansenai/e
 -	`start.sh`
 -	`mysql-scripts/eairp.sql`
 
-**Note that `mysql-scripts` is a folder. You need to copy the folder in its entirety instead of the sql file inside.**
-
-Then copy these four files and the `mysql-scripts` folder to the Eairp source code directory structure. for example:
+Then copy these four files and the `mysql-scripts` folder to the Eairp source code directory structure, Note that `mysql-scripts` is a folder. You need to copy the folder in its entirety instead of the sql file inside. for example:
 
 ```markdown
 eairp/

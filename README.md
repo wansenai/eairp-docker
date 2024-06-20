@@ -15,14 +15,8 @@ It also introduces advanced AI assistants to provide intelligent management solu
 - [Troubleshooting](#troubleshooting)
 - [Details for the eairp image](#details-for-the-eairp-image)
     -	[Configuration Options](#configuration-options)
-    -	[Passing JVM options](#passing-jvm-options)
-    -	[Remote Debugging](#remote-debugging)
     -	[Configuration Files](#configuration-files)
     -	[Miscellaneous](#miscellaneous)
-- [For Maintainers](#for-maintainers)
-    -	[Update Docker Images](#update-docker-images)
-    -	[Testing Docker Images](#testing-docker-images)
-    -	[Clean Up](#clean-up)
 - [License](#license)
 - [Support](#support)
 - [Contribute](#contribute)
@@ -294,7 +288,7 @@ You should always check the [Release Notes](https://github.com/wansenai/eairp/re
 
 The first time you create a container out of the xwiki image, a shell script (`/usr/local/bin/docker-entrypoint.sh`) is executed in the container to setup some configuration. The following environment variables can be passed:
 
--	`SPRING_DATASOURCE_URL`: Eairp is used to connect to the Mysql database JDBC address, Defaults port to 3306.
+-	`SPRING_DATASOURCE_URL`: Used to connect to the Mysql database JDBC address, Defaults port to 3306.
 -	`SPRING_DATASOURCE_USERNAME`: Username for connecting to the MySQL database
 -	`SPRING_DATASOURCE_PASSWORD`: Password for connecting to the MySQL database
 -	`SPRING_REDIS_HOST`: Host address used by Eairp to connect to the Redis database
@@ -307,3 +301,35 @@ If you need to perform some advanced configuration, you can get a shell inside t
 ```console
 docker exec -it <eairp container id> bash -l
 ```
+
+## Configuration Files
+
+There are 4 important configuration files for Eairp that you may want to modify:
+-	`.env`
+-	`start.sh`
+-	`Dockerfile`
+-	`docker-compose.yaml`
+
+## Miscellaneous
+Other additional instructions will be added later
+
+# License
+
+Eairp is licensed under the [Apache-2.0](https://github.com/wansenai/eairp/blob/master/LICENSE-APACHE) and [MIT](https://github.com/wansenai/eairp/blob/master/LICENSE-MIT).
+
+The Dockerfile repository is also licensed under the [Apache-2.0](https://github.com/wansenai/eairp-docker/blob/master/LICENSE).
+
+# Support
+
+-	If you wish to raise an issue or an idea of improvement use [Eairp Issues](https://github.com/wansenai/eairp/issues)
+-	If you have questions, use the [Eairp Discussions](https://github.com/wansenai/eairp/discussions)
+
+# Contribute
+
+-	If you wish to help out on the code, please send Pull Requests on [Eairp Docker GitHub project](https://github.com/wansenai/eairp-docker)
+-	Note that changes need to be merged to all other branches where they make sense and if they make sense for existing tags, those tags must be deleted and recreated.
+-	In addition, whenever a branch or tag is modified, a Pull Request on the [DockerHub Eairp official image](https://hub.docker.com/repository/docker/wansenai/eairp/general) must be made 
+
+# Credits
+
+-	Originally created by [James Zow](https://github.com/Jzow)

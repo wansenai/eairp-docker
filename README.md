@@ -33,7 +33,7 @@ It also introduces advanced AI assistants to provide intelligent management solu
 The goal is to provide a production-ready Eairp system running in Docker. This is why:
 
 -	The OS is based on Debian and not on some smaller-footprint distribution like Alpine
--	Several containers are used with Docker Compose: one for the mysql one for Redis and another for Eairp + Nginx. This allows the ability to run them on different machines for example.
+-	Several containers are used with Docker Compose: one for the mysql one for Redis and another for Eairp + Nginx. This allows the ability to run them on different machines.
 
 # How to use this image
 
@@ -93,7 +93,7 @@ You should adapt the command line to use the passwords that you wish for the MyS
 
 #### Starting Redis
 
-We will bind mount a local directory to be used by the Redis container to contain the data put by Eairp inside the database, so that when you stop and restart Eairp you don't find yourself without any data.  For example:
+We will bind mount a local directory to be used by the Redis container to contain the data put by Eairp inside the database, so that when you stop and restart Eairp you don't find yourself without any data. For example:
 
 -	`/usr/local/redis/data`
 -	`/usr/local/redis/redis.conf`
@@ -160,11 +160,11 @@ If you want to deploy on your server, please modify the value of the `API_BASE_U
 
 ### Using docker-compose
 
-Another solution is to use the Docker Compose files we provide.
+Another solution is to use the Docker Compose files we provide, You must download 5 files from [eairp-docker](https://github.com/wansenai/eairp-docker) repository, they are:
 
--	`wget https://raw.githubusercontent.com/wansenai/eairp-docker/master/latest/mysql-scripts/eairp.sql`: This will download some SQL to execute at startup for MySQL
-	-	If you don't have `wget` or want to use `curl`: `curl -fSL https://raw.githubusercontent.com/wansenai/eairp-docker/master/latest/mysql-scripts/eairp.sql -o eairp.sql`
--	`wget -O docker-compose.yml https://raw.githubusercontent.com/wansenai/eairp-docker/master/latest/docker-compose.yaml`
-	-	If you don't have `wget` or want to use `curl`: `curl -fSL https://raw.githubusercontent.com/wansenai/eairp-docker/master/latest/docker-compose.yaml -o docker-compose.yml`
--	`wget https://raw.githubusercontent.com/wansenai/eairp-docker/master/latest/.env`: This contains default configuration values you should edit (version of Eairp to use, etc)
-	 -	If you don't have `wget` or want to use `curl`: `curl -fSL https://raw.githubusercontent.com/wansenai/eairp-docker/master/latest/.env -o .env`
+-	`.env`
+-	`Dockerfile`
+-	`docker-compose.yaml`
+-	`start.sh`
+-	`mysql-scripts/eairp.sql`
+

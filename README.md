@@ -120,3 +120,34 @@ docker run --net=eairp-nw -d --name redis-eairp -v /usr/local/redis/redis.conf:/
 You should adapt the command line to use the passwords that you wish for the Redis password.
 
 #### Starting Eairp
+
+We will also bind mount a local directory for the Eairp log permanent directory (contains application config and state), for example:
+
+-	`/usr/local/eairp`
+
+Note Make sure the directory you specify is specified with the fully-qualified path, not a relative path.
+
+Ensure this directory exists, and then run XWiki in a container by issuing one of the following command.
+
+```console
+docker run --net=eairp-nw \
+           -d \
+           --name eairp \
+           -p 8088:8088 \
+           -p 3000:80 \
+           -v /usr/local/eairp:/application/log \
+           -e SPRING_DATASOURCE_URL=jdbc:mysql://mysql-eairp:3306/eairp \
+           -e SPRING_DATASOURCE_USERNAME=eairp \
+           -e SPRING_DATASOURCE_PASSWORD=123456 \
+           -e SPRING_REDIS_HOST=redis-eairp \
+           -e SPRING_REDIS_PORT=6379 \
+           -e SPRING_REDIS_PASSWORD=123456 \
+           -e API_BASE_URL=https://eairp.cn/erp-api \
+           wansenai/eairp:latest
+```
+OR
+```console
+docker run --net=eairp-nw -d --name eairp -p 8088:8088 -p 3000:80 -v /usr/local/eairp:/application/log -e SPRING_DATASOURCE_URL=jdbc:mysql://mysql-eairp:3306/eairp -e SPRING_DATASOURCE_USERNAME=eairp -e SPRING_DATASOURCE_PASSWORD=123456 -e SPRING_REDIS_HOST=redis-eairp  -e SPRING_REDIS_PORT=6379 -e SPRING_REDIS_PASSWORD=123456 -e API_BASE_URL=https://eairp.cn/erp-api wansenai/eairp:latest
+```
+
+Please don’t forget to add the MySQL database connection environment variables (`SPRING_DATASOURCE_URL`) and the Redis database connection environment variables (`SPRING_REDIS_HOST`) with the names of the MySQL container and Redis container created earlier so that Eairp knows the location of its databases.

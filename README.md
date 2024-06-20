@@ -263,3 +263,15 @@ volumes:
   mysql-data:
   redis-data:
 ```
+
+## Building
+
+This allows you to rebuild the Eairp docker image locally. Here are the steps:
+-	```shell
+    docker-compose up
+    ```
+-	Start a browser and point it to `http://localhost:3000`
+
+Note that `docker-compose up` will automatically build the Eairp image on the first run. If you need to rebuild it you can issue `docker-compose up --build`. You can also build the image with `docker build . -t eairp:latest` for example.
+
+You can also just build the image by issuing `docker build -t eairp .` and then use the instructions from above to start Eairp and the database using `docker run ...`.

@@ -88,3 +88,35 @@ OR
 ```console
 docker run --net=eairp-nw -d --name mysql-eairp -p 3306:3306 -v /usr/local/mysql:/var/lib/mysql -v /usr/local/mysql-init:/docker-entrypoint-initdb.d -e MYSQL_ROOT_PASSWORD=123456 -e MYSQL_USER=eairp -e MYSQL_PASSWORD=123456 -e MYSQL_DATABASE=eairp -d mysql:8.3 --character-set-server=utf8mb4 --collation-server=utf8mb4_bin --explicit-defaults-for-timestamp=1
 ```
+
+You should adapt the command line to use the passwords that you wish for the MySQL root password.
+
+#### Starting Redis
+
+We will bind mount a local directory to be used by the Redis container to contain the data put by Eairp inside the database, so that when you stop and restart Eairp you don't find yourself without any data.  For example:
+
+-	`/usr/local/redis/data`
+-	`/usr/local/redis/redis.conf`
+
+You need to make sure this directory exists, before proceeding.
+
+Note Make sure the directory you specify is specified with the fully-qualified path, not a relative path.
+
+```console
+docker run --net=eairp-nw \
+           -d \
+           --name redis-eairp \
+           -p 6379:6379 \
+           -v /usr/local/redis/redis.conf:/etc/redis/redis.conf \
+           -v /usr/local/redis/data:/data \
+           -e SPRING_REDIS_PASSWORD=123456
+           redis:latest
+```
+OR
+```console
+docker run --net=eairp-nw -d --name redis-eairp -v /usr/local/redis/redis.conf:/etc/redis/redis.conf -v /usr/local/redis/data:/data -p 6379:6379 redis:latest
+```
+
+You should adapt the command line to use the passwords that you wish for the Redis password.
+
+#### Starting Eairp

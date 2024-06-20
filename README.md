@@ -189,3 +189,69 @@ eairp/
 └── Dockerfile
 └── start.sh
 ```
+
+For reference here's a minimal Docker Compose file that you could use as an example (full example [here](https://github.com/wansenai/eairp-docker/blob/master/latest/docker-compose.yaml)):
+
+```yaml
+version: '3.8'
+networks:
+  bridge:
+    driver: bridge
+services:
+  eairp:
+    image: wansenai/eairp:latest
+    container_name: eairp
+    ports:
+      - "3000:80"
+      - "8088:8088"
+    environment:
+      SPRING_DATASOURCE_URL: "${SPRING_DATASOURCE_URL}"
+      SPRING_DATASOURCE_USERNAME: "${SPRING_DATASOURCE_USERNAME}"
+      SPRING_DATASOURCE_PASSWORD: "${SPRING_DATASOURCE_PASSWORD}"
+      SPRING_REDIS_HOST: "${SPRING_REDIS_HOST}"
+      SPRING_REDIS_PORT: "${SPRING_REDIS_PORT}"
+      SPRING_REDIS_PASSWORD: "${SPRING_REDIS_PASSWORD}"
+      SPRING_PROFILE: "docker"
+    depends_on:
+      - mysql
+      - redis
+    networks:
+      - bridge
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
+      MYSQL_DATABASE: "eairp"
+      MYSQL_USER: "${MYSQL_USER}"
+      MYSQL_PASSWORD: "${MYSQL_PASSWORD}"
+    command:
+      - "--character-set-server=utf8mb4"
+      - "--collation-server=utf8mb4_bin"
+      - "--explicit-defaults-for-timestamp=1"
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./mysql-scripts:/docker-entrypoint-initdb.d
+    cap_add:
+      - SYS_NICE
+    networks:
+      - bridge
+
+  redis:
+    image: redis:7.0
+    container_name: redis
+    command: redis-server --requirepass 123456
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    networks:
+      - bridge
+
+volumes:
+  mysql-data:
+  redis-data:
+```

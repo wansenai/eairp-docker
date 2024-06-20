@@ -157,3 +157,14 @@ Please don’t forget to add the MySQL database connection environment variables
 If you want to deploy on your server, please modify the value of the `API_BASE_URL` environment variable, for example:
 -	`http://eairp.cn/erp-api`
 -	`https://eairp.cn/erp-api`
+
+### Using docker-compose
+
+Another solution is to use the Docker Compose files we provide.
+
+-	`wget https://raw.githubusercontent.com/wansenai/eairp-docker/master/latest/mysql-scripts/eairp.sql`: This will download some SQL to execute at startup for MySQL
+	-	If you don't have `wget` or want to use `curl`: `curl -fSL https://raw.githubusercontent.com/wansenai/eairp-docker/master/latest/mysql-scripts/eairp.sql -o eairp.sql`
+-	`wget -O docker-compose.yml https://raw.githubusercontent.com/wansenai/eairp-docker/master/latest/docker-compose.yaml`
+	-	If you don't have `wget` or want to use `curl`: `curl -fSL https://raw.githubusercontent.com/wansenai/eairp-docker/master/latest/docker-compose.yaml -o docker-compose.yml`
+-	`wget https://raw.githubusercontent.com/wansenai/eairp-docker/master/latest/.env`: This contains default configuration values you should edit (version of Eairp to use, etc)
+	 -	If you don't have `wget` or want to use `curl`: `curl -fSL https://raw.githubusercontent.com/wansenai/eairp-docker/master/latest/.env -o .env`

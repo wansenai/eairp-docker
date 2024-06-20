@@ -68,7 +68,7 @@ You need to make sure these directories exist, and then copy the `eairp.sql` fil
 
 Note: Make sure the directories you are mounting into the container are fully-qualified, and aren't relative paths.
 
-```shell
+```console
 docker run --net=eairp-nw \
            -d \
            --name mysql-eairp \
@@ -83,4 +83,8 @@ docker run --net=eairp-nw \
            --character-set-server=utf8mb4 \
            --collation-server=utf8mb4_bin \
            --explicit-defaults-for-timestamp=1
+```
+OR
+```console
+docker run --net=eairp-nw -d --name mysql-eairp -p 3306:3306 -v /usr/local/mysql:/var/lib/mysql -v /usr/local/mysql-init:/docker-entrypoint-initdb.d -e MYSQL_ROOT_PASSWORD=123456 -e MYSQL_USER=eairp -e MYSQL_PASSWORD=123456 -e MYSQL_DATABASE=eairp -d mysql:8.3 --character-set-server=utf8mb4 --collation-server=utf8mb4_bin --explicit-defaults-for-timestamp=1
 ```

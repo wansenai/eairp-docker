@@ -3,14 +3,14 @@
 # 替换前端配置
 if [ -f /usr/share/nginx/html/dist/assets/index.js ]; then
     echo "替换前端 index.js 配置"
-    sed -i "s|api_base_url|http://localhost:8088/erp-api|g" /usr/share/nginx/html/dist/assets/index.js
+    sed -i "s|api_base_url|${API_BASE_URL}|g" /usr/share/nginx/html/dist/assets/index.js
 else
     echo "index.js not found"
 fi
 
 if [ -f /usr/share/nginx/html/dist/_app.config.js ]; then
     echo "替换前端 _app.config.js 配置"
-    sed -i "s|api_base_url|http://localhost:8088/erp-api|g" /usr/share/nginx/html/dist/_app.config.js
+    sed -i "s|api_base_url|${API_BASE_URL}|g" /usr/share/nginx/html/dist/_app.config.js
 else
     echo "_app.config.js not found"
 fi
